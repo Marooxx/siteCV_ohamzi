@@ -11,9 +11,9 @@
 <body>
 <?php
 $sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
-$ligne = $sql->fetch();// va chercher information 
+$ligne = $sql->fetch();// va chercher information
 
 ?>
-	<p> coucou ! <?php echo $ligne['prenom'].' '.$ligne['nom'];?></p>
+	<p> Hello ! <?php echo $ligne['prenom'].' '.$ligne['nom'];?></p>
 </body>
 </html>
