@@ -158,6 +158,9 @@
                     <li class="active">
                         <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
+                    <li class="active">
+                        <a href="competence.php"><i class="fa fa-fw fa-bar-chart-o"></i> Compétences</a>
+                    </li>
                     <li>
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>

@@ -166,6 +166,9 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     <li>
                         <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
+                     <li>
+                        <a href="competence.php"><i class="fa fa-fw fa-bar-chart-o"></i> Competence</a>
+                    </li>
                     <li>
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>

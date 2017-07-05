@@ -1,7 +1,30 @@
+<?php require '../connexion/connexion.php' ?>
+<?php
+// GEstion du contenu
+// insertion d'une compét_competences
+if (isset($_POST['competence'])) {//si on récupère une nouvelle compétence
+
+    if ($_POST['competence']!='') { // if(!empty($_POST['competence'])) si compétence n'est pas vide
+        $competence = addslashes($_POST['competence']); // addslashes permet d'éviter les pbs d'entre cote ''
+        $pdocv->exec("INSERT INTO t_competences VALUES (NULL, '$competence', '1') ");// mettre $id_utilisateur quand on l'aura en variable de session
+        header("location: ../admin/competence.php");
+        exit();
+    }// ferme le if
+
+}// ferme le if isset
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+<?php
+$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
+$ligne_utilisateur = $sql->fetch();// va chercher information
+?>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +32,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title> Admin <?php echo $ligne_utilisateur['prenom'].' '.$ligne_utilisateur['nom'];?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -57,8 +80,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong><?php echo $ligne_utilisateur['prenom'].' '.$ligne_utilisateur['nom'];?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -73,8 +95,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong><?php echo $ligne_utilisateur['prenom'].' '.$ligne_utilisateur['nom'];?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -89,8 +110,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong><?php echo $ligne_utilisateur['prenom'].' '.$ligne_utilisateur['nom'];?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -131,7 +151,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $ligne_utilisateur['prenom'].' '.$ligne_utilisateur['nom'];?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -159,14 +179,15 @@
                         <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
                      <li>
-                        <a href="competence.php"><i class="fa fa-fw fa-bar-chart-o"></i> Compétences</a>
+                        <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Compétences</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
                         <a href="forms.php"><i class="fa fa-fw fa-edit"></i> Forms</a>
                     </li>
+
                     <li>
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                     </li>
@@ -177,14 +198,14 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="#"></a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="#"></a>
                             </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="blank-page.php"><i class="fa fa-fw fa-file"></i> Blank Page</a>
                     </li>
                     <li>
@@ -198,23 +219,88 @@
         <div id="page-wrapper">
 
             <div class="container-fluid">
-
+                <?php
+                    $competence = $pdocv->prepare("SELECT * FROM t_competences WHERE utilisateur_id = '1' ORDER BY competence ASC ");
+                    $competence->execute();// execute la
+                    $nbr_competences = $competence->rowCount();
+                ?>
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Blank Page
-                            <small>Subheading</small>
-                        </h1>
+                        <h1 class="page-header">Compétences</h1>
+                        <p> Il y a <?php echo $nbr_competences; ?> compétences de la table pour <?php echo $ligne_utilisateur['pseudo']; ?> </p>
+
+
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
+                                <i class="fa fa-table"></i> Compétences
                             </li>
                         </ol>
                     </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>compétences</th>
+                                        <th>modfier</th>
+                                        <th>supprimer</th>
+                                    </tr>
+                                    <tr>
+                                        <?php while ($ligne_competence = $competence->fetch()) { ?>
+                                        <td><?php echo $ligne_competence['competence']; ?></td>
+                                        <td><i class="glyphicon glyphicon-wrench pull-right"></i></td>
+                                        <td><i class="glyphicon glyphicon-trash pull-right"></i></td>
+                                    </tr>
+                                         <?php }?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+ <div class="row">
+    <form class="form-horizontal" method="post" action="competence.php">
+    <fieldset>
+
+    <!-- Form Name -->
+    <legend style="text-align:center;"> Ajout d'une compétence</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="competence"></label>
+      <div class="col-md-4">
+      <input id="competence" name="competence" type="text" placeholder="insérez une compétence" class="form-control input-md">
+
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="button"></label>
+      <div class="col-md-4">
+        <input  type="submit" class="btn btn-primary" value="Ajouter">
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+</div>
+
+
+                <!-- /.row -->
+
+
+
+                        </div>
+                    </div>
+
                 </div>
                 <!-- /.row -->
 
@@ -226,6 +312,10 @@
 
     </div>
     <!-- /#wrapper -->
+
+
+
+
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
