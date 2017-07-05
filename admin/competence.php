@@ -13,6 +13,13 @@ if (isset($_POST['competence'])) {//si on récupère une nouvelle compétence
 
 }// ferme le if isset
 
+//****************** SUPPRESSION D'UNE COMPETENCE ************************
+if (isset($_GET['id_competence'])) {
+    $eraser = $_GET['id_competence'];
+    $sql = "DELETE FROM t_competences WHERE id_competence = '$eraser'";
+    $pdocv->query($sql); // ou on peut avec "exec"
+    header("location:../admin/competence.php");
+}
 ?>
 
 
@@ -256,8 +263,8 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                     <tr>
                                         <?php while ($ligne_competence = $competence->fetch()) { ?>
                                         <td><?php echo $ligne_competence['competence']; ?></td>
-                                        <td><i class="glyphicon glyphicon-wrench pull-right"></i></td>
-                                        <td><i class="glyphicon glyphicon-trash pull-right"></i></td>
+                                        <td><a href="#"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
+                                        <td><a href="competence.php?id_competence= <?php echo $ligne_competence['id_competence'];?>"><span class="glyphicon glyphicon-trash pull-right"></span></a></td>
                                     </tr>
                                          <?php }?>
                                 </tbody>
