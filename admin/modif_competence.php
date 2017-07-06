@@ -1,29 +1,26 @@
 <?php require '../connexion/connexion.php' ?>
+
 <?php
-// GEstion du contenu
-// insertion d'une competences
-if (isset($_POST['competence'])) {//si on récupère une nouvelle compétence
-
-    if ($_POST['competence']!='') { // if(!empty($_POST['competence'])) si compétence n'est pas vide
-        $competence = addslashes($_POST['competence']); // addslashes permet d'éviter les pbs d'entre cote ''
-        $pdocv->exec("INSERT INTO t_competences VALUES (NULL, '$competence', '1') ");// mettre $id_utilisateur quand on l'aura en variable de session
-        header("location: ../admin/competence.php");
+    // Gestion des contenus, mise à jour d'une compétence
+    if(isset($_POST['competence'])){ // par le nom du premier input
+        $competence = addslashes($_POST['competence']);
+        $id_competence = $_POST['id_competence'];
+        $pdocv->exec("UPDATE t_competences SET competence = '$competence' WHERE id_competence ='$id_competence'");
+        header('location:../admin/competence.php');// le header pour revenir à la liste des compétences de l'utilisateur
         exit();
-    }// ferme le if
 
-}// ferme le if isset
+    }
+    //
+// Je récupère la compétence
+$id_competence = $_GET['id_competence'];// par l'id et $_GET
+$sql = $pdocv->query("SELECT * FROM t_competences WHERE id_competence = '$id_competence'"); // la requête égale à l'id
+$ligne_competence = $sql->fetch();//
 
-//****************** SUPPRESSION D'UNE COMPETENCE ************************
-if (isset($_GET['id_competence'])) {
-    $eraser = $_GET['id_competence'];
-    $sql = "DELETE FROM t_competences WHERE id_competence = '$eraser'";
-    $pdocv->query($sql); // ou on peut avec "exec"
-    header("location:../admin/competence.php");
-}
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 <?php
@@ -71,7 +68,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="index.php">SB Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -224,16 +221,12 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
         <div id="page-wrapper">
 
             <div class="container-fluid">
-                <?php
-                    $competence = $pdocv->prepare("SELECT * FROM t_competences WHERE utilisateur_id = '1' ORDER BY competence ASC ");
-                    $competence->execute();// execute la
-                    $nbr_competences = $competence->rowCount();
-                ?>
+
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Compétences</h1>
-                        <p> Il y a <?php echo $nbr_competences; ?> compétences de la table pour <?php echo $ligne_utilisateur['pseudo']; ?> </p>
+                        <h1 class="page-header">Modification Compétence</h1>
+
 
 
                         <ol class="breadcrumb">
@@ -250,38 +243,22 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>compétences</th>
-                                        <th>modfier</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                    <tr>
-                                        <?php while ($ligne_competence = $competence->fetch()) { ?>
-                                        <td><?php echo $ligne_competence['competence']; ?></td>
-                                        <td><a href="modif_competence.php?id_competence=<?php echo $ligne_competence['id_competence'];?>"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
-                                        <td><a href="competence.php?id_competence=<?php echo $ligne_competence['id_competence'];?>"><span class="glyphicon glyphicon-trash pull-right"></span></a></td>
-                                    </tr>
-                                         <?php }?>
-                                </tbody>
-                            </table>
-                        </div>
+
                     </div>
                 </div>
  <div class="row">
-    <form class="form-horizontal" method="post" action="competence.php">
+    <form class="form-horizontal" method="post" action="modif_competence.php">
     <fieldset>
 
-    <!-- Form Name -->
-    <legend style="text-align:center;"> Ajout d'une compétence</legend>
+    <!-- Form modification d'une compétence -->
+    <legend style="text-align:center;"> Modification d'une compétence</legend>
 
     <!-- Text input-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="competence"></label>
       <div class="col-md-4">
-      <input id="competence" name="competence" type="text" placeholder="insérez une compétence" class="form-control input-md">
+      <input id="competence" name="competence" type="text"  class="form-control input-md" value="<?php echo $ligne_competence['competence']; ?>">
+      <input hidden name="id_competence" value="<?php echo $ligne_competence['id_competence']; ?>">
 
       </div>
     </div>
@@ -290,12 +267,15 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
     <div class="form-group">
       <label class="col-md-4 control-label" for="button"></label>
       <div class="col-md-4">
-        <input  type="submit" class="btn btn-primary" value="Ajouter">
-      </div>
+        <input  type="submit" class="btn btn-primary" value="Mettre à jour">
+    </div>
+
+
     </div>
 
     </fieldset>
     </form>
+    <!-- Fin formulaire  -->
 </div>
 
 
@@ -309,14 +289,6 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                 </div>
                 <!-- /.row -->
 
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
 
 
 
