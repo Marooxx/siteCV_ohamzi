@@ -167,7 +167,10 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
                      <li>
-                        <a href="competence.php"><i class="fa fa-fw fa-bar-chart-o"></i> Competence</a>
+                        <a href="competence.php"><i class="fa fa-fw fa-bar-chart-o"></i> Compétences</a>
+                    </li>
+                     <li>
+                        <a href="loisir.php"><i class="fa fa-fw fa-bar-chart-o"></i> Loisirs</a>
                     </li>
                     <li>
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
@@ -176,10 +179,10 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         <a href="forms.php"><i class="fa fa-fw fa-edit"></i> Forms</a>
                     </li>
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                        <a href="bootstrap-elements.php"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                     </li>
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                        <a href="bootstrap-grid.php"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
@@ -210,7 +213,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <!-- Requête -->
+                        <!-- Requête AFFICHAGE -->
                         <?php
                         $sql = $pdocv->query("SELECT * FROM t_titres_cv WHERE utilisateur_id = '1' ");
                         $ligne_accroche = $sql->fetch();// va chercher information

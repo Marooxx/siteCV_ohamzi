@@ -6,7 +6,7 @@ if (isset($_POST['loisir'])) {//si on récupère une nouvelle compétence
 
     if ($_POST['loisir']!='') { // if(!empty($_POST['competence'])) si compétence n'est pas vide
         $loisir = addslashes($_POST['loisir']); // addslashes permet d'éviter les pbs d'entre cote ''
-        $pdocv->exec("INSERT INTO t_loisirs VALUES (NULL, '$loisir', '1') ");// mettre $id_utilisateur quand on l'aura en variable de session
+        $pdocv->exec("INSERT INTO t_loisirs VALUES ( NULL, '$loisir', '1') ");// mettre $id_utilisateur quand on l'aura en variable de session
         header("location: ../admin/loisir.php");
         exit();
     }// ferme le if
@@ -23,7 +23,7 @@ if (isset($_GET['id_loisir'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 <?php

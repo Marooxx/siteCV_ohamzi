@@ -1,7 +1,12 @@
+<?php require '../connexion/connexion.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <?php
+    $sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
+    $ligne_utilisateur = $sql->fetch();// va chercher information
+    ?>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="index.html">Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -57,7 +62,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong><?php echo $ligne_utilisateur['prenom'].' '.$ligne_utilisateur['nom'];?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -72,7 +77,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -87,7 +92,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong><?php echo $ligne_utilisateur['prenom'].' '.$ligne_utilisateur['nom'];?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -128,7 +133,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $ligne_utilisateur['prenom'].' '.$ligne_utilisateur['nom'];?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -150,22 +155,28 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                        <a href="competence.php"><i class="fa fa-fw fa-bar-chart-o"></i>Compétences</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                        <a href="loisir.php"><i class="fa fa-fw fa-bar-chart-o"></i> Loisirs</a>
                     </li>
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                        <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
+                    </li>
+                    <li>
+                        <a href="forms.php"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                    </li>
+                    <li>
+                        <a href="bootstrap-elements.php"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                     </li>
                     <li class="active">
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                        <a href="bootstrap-grid.php"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
@@ -179,10 +190,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                        <a href="blank-page.php"><i class="fa fa-fw fa-file"></i> Blank Page</a>
                     </li>
                     <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                        <a href="index-rtl.php"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                     </li>
                 </ul>
             </div>
