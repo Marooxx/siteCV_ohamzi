@@ -11,7 +11,7 @@
             	$description_e = addslashes($_POST['description_e']);
             	$dates_e = addslashes($_POST['dates_e']);
 
-				$pdocv->exec(" INSERT INTO t_experiences VALUES (NULL, '$titre_e', '$sous_titre_e', '$description_e', '$dates_e', '1') ");//mettre $id_utilisateur quand on l'aura en variable de session
+				$pdocv->exec(" INSERT INTO t_experiences VALUES (NULL, '$titre_e', '$sous_titre_e', '$description_e', '$dates_e', '$id_utilisateur') ");//mettre $id_utilisateur quand on l'aura en variable de session
 				header("location: ../admin/experience.php");
 				exit();
 			}//ferme le if
@@ -273,12 +273,12 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                             <table class="table table-bordered table-hover">
                                 <tbody>
                                     <tr>
-                                        <th>expériences</th>
-                                        <th>entreprise</th>
-                                        <th>date</th>
-                                        <th>description</th>
-                                        <th>modfier</th>
-                                        <th>supprimer</th>
+                                        <th>Expériences</th>
+                                        <th>Entreprise</th>
+                                        <th>Date</th>
+                                        <th>Descriptif</th>
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
                                     </tr>
                                     <tr>
                                         <?php while ($ligne_experience = $experience->fetch()) { ?>
@@ -305,25 +305,32 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="experience"></label>
+      
+        <label class="col-md-4 control-label" for="experience"></label>
       <div class="col-md-4"><br>
       <input id="experience" name="experience" type="text" placeholder="insérez une expérience" class="form-control input-md"><br>
-      <label class="col-md-4 control-label" for="entreprise"></label>
-      <div class="col-md-4"><br>
+      
+          <label class="col-md-6 control-label" for="entreprise"></label>
+      <div class="col-md-7"><br>
       <input id="entreprise" name="entreprise" type="text" placeholder="insérez l'entreprise" class="form-control input-md"><br>
-      <label class="col-md-4 control-label" for="date"></label>
+      
+          <label class="col-md-6 control-label" for="date"></label>
       <input id="date" name="date" type="date" placeholder="insérez une date" class="form-control input-md"><br>
+        
+          <label class="col-md-6 control-label" for="description"></label>
+        <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md"></textarea><br>
 
-      </div>
-    </div>
-
-    <!-- Button -->
+            <!-- Button -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="button"></label>
       <div class="col-md-4">
         <input  type="submit" class="btn btn-primary" value="Ajouter">
       </div>
     </div>
+      </div>
+    </div>
+
+  
 
     </fieldset>
     </form>
