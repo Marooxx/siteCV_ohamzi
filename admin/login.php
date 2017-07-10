@@ -28,43 +28,44 @@ if (isset($_POST['connexion'])) { // on envoie le form avec le name du bouton ( 
 }// ferme if isset
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Login</title>
+    <!DOCTYPE html>
+    <html lang="fr">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Login</title>
 
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/login.css">
+        <!-- Custom CSS -->
+        <link href="css/sb-admin.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+        <!-- Custom Fonts -->
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="css/login.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-</head>
-<div class="wrapper">
-    <div>
-    <form class="form-signin" action="login.php" method="post">
-        <h2 class="form-signin-heading">Please login</h2>
-        <input type="email" class="form-control" name="email" placeholder="Email" required="" autofocus="" />
-        <input type="password" class="form-control" name="mdp" placeholder="Mot de passe" required=""/>
-        <label class="checkbox">
+    </head>
+    <div class="wrapper">
+        <div>
+            <form class="form-signin" action="login.php" method="post">
+                <h2 class="form-signin-heading">Please login</h2>
+                <input type="email" class="form-control" name="email" placeholder="Email" required="" autofocus="" />
+                <input type="password" class="form-control" name="mdp" placeholder="Mot de passe" required="" />
+                <label class="checkbox">
             <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
         </label>
-        <input class="btn" name="connexion" type="submit" value="connexion">
-    </form>
-</div>
+                <b></b> <input class="btn" name="connexion" type="submit" value="connexion">
+            </form>
+        </div>

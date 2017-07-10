@@ -201,6 +201,9 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     </li>
                      <li>
                         <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
+                    </li> 
+                    <li>
+                        <a href="loisir.php"><i class="fa fa-fw fa-edit"></i> Loisirs</a>
                     </li>
                     <li class="active">
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
@@ -271,13 +274,20 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                 <tbody>
                                     <tr>
                                         <th>expériences</th>
+                                        <th>entreprise</th>
+                                        <th>date</th>
+                                        <th>description</th>
                                         <th>modfier</th>
                                         <th>supprimer</th>
                                     </tr>
                                     <tr>
                                         <?php while ($ligne_experience = $experience->fetch()) { ?>
-                                        <td><?php echo $ligne_experience['experience']; ?></td>
-                                        <td><a href="modif_experience.php?id_experience=<?php echo $ligne_loisir['id_experience'];?>"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
+                                        <td><?php echo $ligne_experience['titre_e']; ?></td>
+                                        <td><?php echo $ligne_experience['sous_titre_e']; ?></td>
+                                        <td><?php echo $ligne_experience['date']; ?></td>
+                                        <td><?php echo $ligne_experience['description']; ?></td>
+                                        
+                                        <td><a href="modif_experience.php?id_experience=<?php echo $ligne_experience['id_experience'];?>"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
                                         <td><a href="experience.php?id_experience=<?php echo $ligne_experience['id_experience'];?>"><span class="glyphicon glyphicon-trash pull-right"></span></a></td>
                                     </tr>
                                          <?php }?>

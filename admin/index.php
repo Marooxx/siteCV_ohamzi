@@ -1,12 +1,43 @@
 
 <?php require '../connexion/connexion.php' ?>
+<?php 
+    // Sessicon d'identification
+    
+session_start();// à mettre sur toutes les pages de l'admin; SESSION et authentification
+    if(isset($_SESSION['connexion']) && $_SESSION['connexion']='connecté'){
+        $id_utilisateur = $_SESSION['id_utilisateur'];
+        $prenom = $_SESSION['prenom'];
+        $nom = $_SESSION['nom'];
+    }else{// l'utilisateur n'est pas connecté
+        header('location:login.php');
+    }
+// pour se déconnecter
+if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url 
+    $_SESSION['connexion'] ='';// on vide les variables de session
+    $_SESSION['id_utilisateur'] ='';// on vide les variables de session
+    $_SESSION['prenom'] ='';// on vide les variables de session
+    $_SESSION['nom'] ='';// on vide les variables de session
+    $_SESSION['email'] ='';// on vide les variables de session
+
+    unset($_SESSION['connexion']);
+    session_destroy();
+    
+    header('location:index.php');
+}
+
+
+
+
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
 <?php
-$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
+$sql = $pdocv->query(" SELECT * FROM t_utilisateurs WHERE id_utilisateur = $id_utilisateur ");
 $ligne_utilisateur = $sql->fetch();// va chercher information
 ?>
     <meta charset="utf-8">
@@ -152,7 +183,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="index.php?deconnect=oui"><i class="fa fa-fw fa-power-off"></i> LogOut</a>
                         </li>
                     </ul>
                 </li>
@@ -163,14 +194,14 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     <li class="active">
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li>
+                  <!--  <li>
                         <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                    </li>-->
+                     <li>
+                        <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Compétences</a>
                     </li>
                      <li>
-                        <a href="competence.php"><i class="fa fa-fw fa-bar-chart-o"></i> Compétences</a>
-                    </li>
-                     <li>
-                        <a href="experience.php"><i class="fa fa-fw fa-bar-chart-o"></i> Expériences</a>
+                        <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
                     </li>
                      <li>
                         <a href="loisir.php"><i class="fa fa-fw fa-bar-chart-o"></i> Loisirs</a>
@@ -179,7 +210,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
-                        <a href="forms.php"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                        <a href="forms.php"><i class="fa fa-fw fa-edit-o"></i> Forms</a>
                     </li>
                     <li>
                         <a href="bootstrap-elements.php"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>

@@ -185,6 +185,9 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     </li>
                      <li>
                         <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Compétences</a>
+                    </li> 
+                    <li>
+                        <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
                     </li>
                      <li>
                         <a href="loisir.php"><i class="fa fa-fw fa-edit"></i> Loisirs</a>
