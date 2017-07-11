@@ -1,5 +1,30 @@
 
-<?php require '../connexion/connexion.php' ?>
+<?php require '../connexion/connexion.php'; 
+// Sessicon d'identification
+    
+session_start();// à mettre sur toutes les pages de l'admin; SESSION et authentification
+    if(isset($_SESSION['connexion']) && $_SESSION['connexion']='connecté'){
+        $id_utilisateur = $_SESSION['id_utilisateur'];
+        $prenom = $_SESSION['prenom'];
+        $nom = $_SESSION['nom'];
+    }else{// l'utilisateur n'est pas connecté
+        header('location:login.php');
+    }
+// pour se déconnecter
+if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url 
+    $_SESSION['connexion'] ='';// on vide les variables de session
+    $_SESSION['id_utilisateur'] ='';// on vide les variables de session
+    $_SESSION['prenom'] ='';// on vide les variables de session
+    $_SESSION['nom'] ='';// on vide les variables de session
+    $_SESSION['email'] ='';// on vide les variables de session
+
+    unset($_SESSION['connexion']);
+    session_destroy();
+    
+    header('location:index.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,18 +69,18 @@
 // insertion d'une competences
 //gestion des contenus
 	//insertion d'une expérience
-		if(isset($_POST['experience'])){//si on récupère une nouvelle expérience
-			if($_POST['experience']!='' && $_POST['description_e']!='' && $_POST['dates_e']!=''){// si expérience et les autres champs ne sont pas vide
-				$xp = addslashes($_POST['experience']);
-				$sous_titre = addslashes($_POST['sous_titre_e']);
-            	$date = addslashes($_POST['dates_e']);
-            	$description = addslashes($_POST['description_e']);
-
-				$pdocv->exec("INSERT INTO t_experiences VALUES (NULL, '$xp','$sous_titre','$date', '$description', '$id_utilisateur') ");//mettre $id_utilisateur quand on l'aura en variable de session
-				header("location: ../admin/experience.php");
+		if(isset($_POST['experience'])){ // si onn recupere une nouvelle experience
+   //si compétencde n'est pas vide
+        $titre = addslashes($_POST['experience']);
+        $dates = addslashes($_POST['dates_e']);
+        $sous_titre = addslashes($_POST['sous_titre_e']);
+        $description = addslashes($_POST['description_e']);
+        //$pdocv->exec("INSERT INTO t_experiences VALUES (NULL, '$date','$titre','$sous_titre','$description', '1') ");//mettre $id_utilisateur quand on l'aura en variable de Session
+        $pdocv->exec("INSERT INTO t_experiences VALUES (NULL, '$titre','$sous_titre','$dates','$description', '$id_utilisateur') ");//mettre $id_utilisateur quand on l'aura en variable de Session
+            header("location: experience.php");
 				exit();
 			}//ferme le if
-		}//ferme le if isset
+		//ferme le if isset
 
 	//suppression d'une expérience  
 		if(isset($_GET['id_experience'])){
@@ -80,7 +105,7 @@ if (isset($_GET['id_competence'])) {
 
 <head>
 <?php
-$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '$id_utilisateur' ");
+$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
 $ligne_utilisateur = $sql->fetch();// va chercher information
 ?>
 
@@ -357,18 +382,18 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
        
           <!-- Input entreprise--> 
       <div class="col-md-7"><br>
-      <input id="entreprise" name="entreprise" type="text" placeholder=" Nom de l'entreprise" class="form-control input-md"><br>
+      <input id="entreprise" name="sous_titre_e" type="text" placeholder=" Nom de l'entreprise" class="form-control input-md"><br>
       
           
            <!-- Input date -->
-      <input id="date" name="date" type="date" placeholder="insérez une date" class="form-control input-md"><br>
+      <input id="date" name="dates_e" type="date" placeholder="insérez une date" class="form-control input-md"><br>
         
          
            
             
             <!-- Input description-->
         <div class="col-md-12">
-        <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md col-md-12"></textarea><br>
+        <textarea id="description" name="description_e" type="text" placeholder="description" class="form-control input-md col-md-12"></textarea><br>
          <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
         <script>CKEDITOR.replace( 'description' ) </script>
           </div>

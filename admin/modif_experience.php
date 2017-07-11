@@ -2,18 +2,18 @@
 
 <?php
     // Gestion des contenus, mise à jour d'une compétence
-    if(isset($_POST['titre_e'])){ // par le nom du premier input
-        $xp = addslashes($_POST['titre_e']);
-        $id_xp = $_POST['id_experience'];
-        $pdocv->exec("UPDATE t_experiences SET titre_e = '$competence' WHERE id_experience ='$id_xp'");
+    if(isset($_POST['experience'])){ // par le nom du premier input
+        $exp = addslashes($_POST['experience']);
+        $id_exp = $_POST['id_experience'];
+        $pdocv->exec("UPDATE t_experiences SET experience = '$exp' WHERE id_experience ='$id_exp'");
         header('location:../admin/experience.php');// le header pour revenir à la liste des compétences de l'utilisateur
         exit();
 
     }
     //
 // Je récupère la compétence
-$id_xp = $_GET['id_experience'];// par l'id et $_GET
-$sql = $pdocv->query("SELECT * FROM t_experiences WHERE id_experience = '$id_xp'"); // la requête égale à l'id
+$id_exp = $_GET['id_experience'];// par l'id et $_GET
+$sql = $pdocv->query("SELECT * FROM t_experiences WHERE id_experience = '$id_exp' "); // la requête égale à l'id
 $ligne_xp = $sql->fetch();//
 
 
@@ -253,7 +253,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     </div>
                 </div>
  <div class="row">
-    <form class="form-horizontal" method="post" action="modif_competence.php">
+    <form class="form-horizontal" method="post" action="modif_experience.php">
     <fieldset>
 
     <!-- Form modification d'une compétence -->
@@ -263,7 +263,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
     <div class="form-group">
       <label class="col-md-4 control-label" for="xp"></label>
       <div class="col-md-4">
-      <input id="xp" name="xp" type="text"  class="form-control input-md" value="<?php echo $ligne_xp['titre_e']; ?>">
+      <input id="xp" name="experience" type="text"  class="form-control input-md" value="<?php echo $ligne_xp['experience']; ?>">
       <input hidden name="id_experience" value="<?php echo $ligne_xp['id_experience']; ?>">
 
       </div>
