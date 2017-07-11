@@ -1,33 +1,30 @@
 <?php require '../connexion/connexion.php' ?>
+
 <?php
-// GEstion du contenu
-// insertion d'une competences
-if (isset($_POST['competence'])) {//si on récupère une nouvelle compétence
-
-    if ($_POST['competence']!='') { // if(!empty($_POST['competence'])) si compétence n'est pas vide
-        $competence = addslashes($_POST['competence']); // addslashes permet d'éviter les pbs d'entre cote ''
-        $pdocv->exec("INSERT INTO t_competences VALUES (NULL, '$competence', '$id_utilisateur') ");// mettre $id_utilisateur quand on l'aura en variable de session
-        header("location: ../admin/competence.php");
+    // Gestion des contenus, mise à jour d'une compétence
+    if(isset($_POST['titre_e'])){ // par le nom du premier input
+        $xp = addslashes($_POST['titre_e']);
+        $id_xp = $_POST['id_experience'];
+        $pdocv->exec("UPDATE t_experiences SET titre_e = '$competence' WHERE id_experience ='$id_xp'");
+        header('location:../admin/experience.php');// le header pour revenir à la liste des compétences de l'utilisateur
         exit();
-    }// ferme le if
 
-}// ferme le if isset
+    }
+    //
+// Je récupère la compétence
+$id_xp = $_GET['id_experience'];// par l'id et $_GET
+$sql = $pdocv->query("SELECT * FROM t_experiences WHERE id_experience = '$id_xp'"); // la requête égale à l'id
+$ligne_xp = $sql->fetch();//
 
-//****************** SUPPRESSION D'UNE COMPETENCE ************************
-if (isset($_GET['id_competence'])) {
-    $eraser = $_GET['id_competence'];
-    $sql = "DELETE FROM t_competences WHERE id_competence = '$eraser'";
-    $pdocv->query($sql); // ou on peut avec "exec"
-    header("location:../admin/competence.php");
-}
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 <?php
-$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
+$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '$id_utilisateur' ");
 $ligne_utilisateur = $sql->fetch();// va chercher information
 ?>
 
@@ -71,7 +68,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="index.php">SB Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -187,12 +184,11 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Compétences</a>
                     </li> 
                     <li>
-                        <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
-                    </li> 
-                    <li>
+                        <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
+                    </li>
+                     <li>
                         <a href="loisir.php"><i class="fa fa-fw fa-edit"></i> Loisirs</a>
                     </li>
-                    
                     <li class="active">
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
@@ -201,10 +197,10 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     </li>
 
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                        <a href="bootstrap-elements.php"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                     </li>
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                        <a href="bootstrap-grid.php"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
@@ -231,16 +227,12 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
         <div id="page-wrapper">
 
             <div class="container-fluid">
-                <?php
-                    $competence = $pdocv->prepare("SELECT * FROM t_competences WHERE utilisateur_id = '1' ORDER BY competence ASC ");
-                    $competence->execute();// execute la
-                    $nbr_competences = $competence->rowCount();
-                ?>
+
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Compétences</h1>
-                        <p> Il y a <?php echo $nbr_competences; ?> compétences de la table pour <?php echo $ligne_utilisateur['pseudo']; ?> </p>
+                        <h1 class="page-header">Modification Expérience(s)</h1>
+
 
 
                         <ol class="breadcrumb">
@@ -248,7 +240,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                 <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Compétences
+                                <i class="fa fa-table"></i> Expériences
                             </li>
                         </ol>
                     </div>
@@ -257,38 +249,22 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>compétences</th>
-                                        <th>modfier</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                    <tr>
-                                        <?php while ($ligne_competence = $competence->fetch()) { ?>
-                                        <td><?php echo $ligne_competence['competence']; ?></td>
-                                        <td><a href="modif_competence.php?id_competence=<?php echo $ligne_competence['id_competence'];?>"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
-                                        <td><a class="supp" href="competence.php?id_competence=<?php echo $ligne_competence['id_competence'];?>"><span class="glyphicon glyphicon-trash pull-right"></span></a></td>
-                                    </tr>
-                                         <?php }?>
-                                </tbody>
-                            </table>
-                        </div>
+
                     </div>
                 </div>
  <div class="row">
-    <form class="form-horizontal" method="post" action="competence.php">
+    <form class="form-horizontal" method="post" action="modif_competence.php">
     <fieldset>
 
-    <!-- Form Name -->
-    <legend style="text-align:center;"> Ajout d'une compétence</legend>
+    <!-- Form modification d'une compétence -->
+    <legend style="text-align:center;"> Modification d'une expérience</legend>
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="competence"></label>
+      <label class="col-md-4 control-label" for="xp"></label>
       <div class="col-md-4">
-      <input id="competence" name="competence" type="text" placeholder="insérez une compétence" class="form-control input-md">
+      <input id="xp" name="xp" type="text"  class="form-control input-md" value="<?php echo $ligne_xp['titre_e']; ?>">
+      <input hidden name="id_experience" value="<?php echo $ligne_xp['id_experience']; ?>">
 
       </div>
     </div>
@@ -297,12 +273,15 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
     <div class="form-group">
       <label class="col-md-4 control-label" for="button"></label>
       <div class="col-md-4">
-        <input  type="submit" class="btn btn-primary" value="Ajouter">
-      </div>
+        <input  type="submit" class="btn btn-primary" value="Mettre à jour">
+    </div>
+
+
     </div>
 
     </fieldset>
     </form>
+    <!-- Fin formulaire  -->
 </div>
 
 
@@ -316,14 +295,6 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                 </div>
                 <!-- /.row -->
 
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
 
 
 
@@ -334,7 +305,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/omar.js"></script>
+
 </body>
 
 </html>

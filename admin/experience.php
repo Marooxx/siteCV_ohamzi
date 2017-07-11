@@ -1,23 +1,63 @@
+
 <?php require '../connexion/connexion.php' ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+
+
 <?php
 // GEstion du contenu
 // insertion d'une competences
 //gestion des contenus
 	//insertion d'une expérience
-		if(isset($_POST['titre_e'])){//si on récupère une nouvelle expérience
-			if($_POST['titre_e']!='' && $_POST['description_e']!='' && $_POST['dates_e']!=''){// si expérience et les autres champs ne sont pas vide
-				$titre_e = addslashes($_POST['titre_e']);
-				$sous_titre_e = addslashes($_POST['sous_titre_e']);
-            	$description_e = addslashes($_POST['description_e']);
-            	$dates_e = addslashes($_POST['dates_e']);
+		if(isset($_POST['experience'])){//si on récupère une nouvelle expérience
+			if($_POST['experience']!='' && $_POST['description_e']!='' && $_POST['dates_e']!=''){// si expérience et les autres champs ne sont pas vide
+				$xp = addslashes($_POST['experience']);
+				$sous_titre = addslashes($_POST['sous_titre_e']);
+            	$date = addslashes($_POST['dates_e']);
+            	$description = addslashes($_POST['description_e']);
 
-				$pdocv->exec(" INSERT INTO t_experiences VALUES (NULL, '$titre_e', '$sous_titre_e', '$description_e', '$dates_e', '$id_utilisateur') ");//mettre $id_utilisateur quand on l'aura en variable de session
+				$pdocv->exec("INSERT INTO t_experiences VALUES (NULL, '$xp','$sous_titre','$date', '$description', '$id_utilisateur') ");//mettre $id_utilisateur quand on l'aura en variable de session
 				header("location: ../admin/experience.php");
 				exit();
 			}//ferme le if
 		}//ferme le if isset
 
-	//suppression d'une expérience
+	//suppression d'une expérience  
 		if(isset($_GET['id_experience'])){
 			$eraser= $_GET['id_experience'];
 			$sql = " DELETE FROM t_experiences WHERE id_experience = '$eraser' ";
@@ -40,7 +80,7 @@ if (isset($_GET['id_competence'])) {
 
 <head>
 <?php
-$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
+$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '$id_utilisateur' ");
 $ligne_utilisateur = $sql->fetch();// va chercher information
 ?>
 
@@ -244,15 +284,15 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
             <div class="container-fluid">
                 <?php
-                    $experience = $pdocv->prepare("SELECT * FROM t_experiences WHERE utilisateur_id = '1' ORDER BY experience ASC ");
-                    $experience->execute();// execute la
-                    $nbr_experiences = $experience->rowCount();
+                    $xp = $pdocv->prepare("SELECT * FROM t_experiences WHERE utilisateur_id = '$id_utilisateur' ORDER BY experience ASC ");
+                    $xp->execute();// execute la
+                    $nbr_experiences = $xp->rowCount();
                 ?>
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">EXPERIENCES</h1>
-                        <p> Il y a <?php echo $nbr_experiences; ?> expériences de la table pour <?php echo $ligne_utilisateur['pseudo']; ?> </p>
+                        <p> Il y a <?php echo $nbr_experiences; ?> expériences  <?php echo $ligne_utilisateur['pseudo']; ?> </p>
 
 
                         <ol class="breadcrumb">
@@ -260,7 +300,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                 <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> EXPERIENCES
+                                <i class="fa fa-table"></i>EXPERIENCES
                             </li>
                         </ol>
                     </div>
@@ -281,14 +321,14 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                         <th>Supprimer</th>
                                     </tr>
                                     <tr>
-                                        <?php while ($ligne_experience = $experience->fetch()) { ?>
-                                        <td><?php echo $ligne_experience['titre_e']; ?></td>
-                                        <td><?php echo $ligne_experience['sous_titre_e']; ?></td>
-                                        <td><?php echo $ligne_experience['date']; ?></td>
-                                        <td><?php echo $ligne_experience['description']; ?></td>
+                                        <?php while ($ligne_xp = $xp->fetch()) { ?>
+                                        <td><?php echo $ligne_xp['experience']; ?></td>
+                                        <td><?php echo $ligne_xp['sous_titre_e']; ?></td>
+                                        <td><?php echo $ligne_xp['dates_e']; ?></td>
+                                        <td><?php echo $ligne_xp['description_e']; ?></td>
                                         
-                                        <td><a href="modif_experience.php?id_experience=<?php echo $ligne_experience['id_experience'];?>"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
-                                        <td><a href="experience.php?id_experience=<?php echo $ligne_experience['id_experience'];?>"><span class="glyphicon glyphicon-trash pull-right"></span></a></td>
+                                        <td><a href="modif_experience.php?id_experience=<?php echo $ligne_xp['id_experience'];?>"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
+                                        <td><a href="experience.php?id_experience=<?php echo $ligne_xp['id_experience'];?>"><span class="glyphicon glyphicon-trash pull-right"></span></a></td>
                                     </tr>
                                          <?php }?>
                                 </tbody>
@@ -297,7 +337,10 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     </div>
                 </div>
  <div class="row">
-    <form class="form-horizontal" method="post" action="experience.php">
+    
+            <!-- FORMULAIRE INSERTION EXPERIENCE--> 
+     
+     <form class="form-horizontal" method="post" action="experience.php">
     <fieldset>
 
     <!-- FOrmulaire des expériences -->
@@ -306,29 +349,41 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
     <!-- Text input-->
     <div class="form-group">
       
-        <label class="col-md-4 control-label" for="experience"></label>
-      <div class="col-md-4"><br>
-      <input id="experience" name="experience" type="text" placeholder="insérez une expérience" class="form-control input-md"><br>
+        
+        <!-- Input expérience-->
+      <div class="col-md-10"><br>
+      <input id="experience" name="experience" type="text" placeholder=" Expérience" class="form-control input-md col-md-10"><br>
       
-          <label class="col-md-6 control-label" for="entreprise"></label>
+       
+          <!-- Input entreprise--> 
       <div class="col-md-7"><br>
-      <input id="entreprise" name="entreprise" type="text" placeholder="insérez l'entreprise" class="form-control input-md"><br>
+      <input id="entreprise" name="entreprise" type="text" placeholder=" Nom de l'entreprise" class="form-control input-md"><br>
       
-          <label class="col-md-6 control-label" for="date"></label>
+          
+           <!-- Input date -->
       <input id="date" name="date" type="date" placeholder="insérez une date" class="form-control input-md"><br>
         
-          <label class="col-md-6 control-label" for="description"></label>
-        <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md"></textarea><br>
-
-            <!-- Button -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="button"></label>
-      <div class="col-md-4">
+         
+           
+            
+            <!-- Input description-->
+        <div class="col-md-12">
+        <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md col-md-12"></textarea><br>
+         <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+        <script>CKEDITOR.replace( 'description' ) </script>
+          </div>
+            <!-- Button Ajouter -->
+        <div class="col-md-10">
         <input  type="submit" class="btn btn-primary" value="Ajouter">
-      </div>
+        </div>
+   
+      
+        </div>
     </div>
-      </div>
-    </div>
+</div>
+         
+         
+          
 
   
 
@@ -365,7 +420,6 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/monjs.js"></script>
-</body>
-
-</html>
+   
+   
+    

@@ -1,5 +1,0 @@
-// javascript Document
-console.log("coucou")
-$(function()){// vérifierf que le chargement 
-    $('.supprimer').on("click")
-}
