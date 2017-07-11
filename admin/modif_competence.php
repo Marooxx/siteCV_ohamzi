@@ -13,7 +13,7 @@
     //
 // Je récupère la compétence
 $id_competence = $_GET['id_competence'];// par l'id et $_GET
-$sql = $pdocv->query("SELECT * FROM t_competences WHERE id_competence = '$id_competence'"); // la requête égale à l'id
+$sql = $pdocv->query("SELECT * FROM t_competences WHERE id_competence = '$id_competence' "); // la requête égale à l'id
 $ligne_competence = $sql->fetch();//
 
 
