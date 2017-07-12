@@ -1,103 +1,22 @@
-
-<?php require '../connexion/connexion.php'; 
-// Sessicon d'identification
-    
-session_start();// à mettre sur toutes les pages de l'admin; SESSION et authentification
-    if(isset($_SESSION['connexion']) && $_SESSION['connexion']='connecté'){
-        $id_utilisateur = $_SESSION['id_utilisateur'];
-        $prenom = $_SESSION['prenom'];
-        $nom = $_SESSION['nom'];
-    }else{// l'utilisateur n'est pas connecté
-        header('location:login.php');
-    }
-// pour se déconnecter
-if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url 
-    $_SESSION['connexion'] ='';// on vide les variables de session
-    $_SESSION['id_utilisateur'] ='';// on vide les variables de session
-    $_SESSION['prenom'] ='';// on vide les variables de session
-    $_SESSION['nom'] ='';// on vide les variables de session
-    $_SESSION['email'] ='';// on vide les variables de session
-
-    unset($_SESSION['connexion']);
-    session_destroy();
-    
-    header('location:index.php');
-}
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
-    <![endif]-->
-
-</head>
-
-
-
-
-
-
-
+<?php require '../connexion/connexion.php' ?>
 
 <?php
-// GEstion du contenu
-// insertion d'une competences
-//gestion des contenus
-	//insertion d'une expérience
-		if(isset($_POST['experience'])){ // si onn recupere une nouvelle experience
-   //si compétencde n'est pas vide
-        $titre = addslashes($_POST['experience']);
-        $dates = addslashes($_POST['dates_e']);
-        $sous_titre = addslashes($_POST['sous_titre_e']);
-        $description = addslashes($_POST['description_e']);
-        //$pdocv->exec("INSERT INTO t_experiences VALUES (NULL, '$date','$titre','$sous_titre','$description', '1') ");//mettre $id_utilisateur quand on l'aura en variable de Session
-        $pdocv->exec("INSERT INTO t_experiences VALUES (NULL, '$titre','$sous_titre','$dates','$description', '$id_utilisateur') ");//mettre $id_utilisateur quand on l'aura en variable de Session
-            header("location: experience.php");
-				exit();
-			}//ferme le if
-		//ferme le if isset
+    # Gestion des contenus, mise à jour d'une compétence #
+    if(isset($_POST['formation'])){ // par le nom du premier input
+        $formation = addslashes($_POST['formation']);
+        $id_formation = $_POST['id_formation'];
+        $pdocv->exec("UPDATE t_formations SET formation = '$formation' WHERE id_formation ='$id_formation'");
+        header('location:../admin/formation.php');// le header pour revenir à la liste des compétences de l'utilisateur
+        exit();
 
-	//suppression d'une expérience  
-		if(isset($_GET['id_experience'])){
-			$eraser= $_GET['id_experience'];
-			$sql = " DELETE FROM t_experiences WHERE id_experience = '$eraser' ";
-			$pdocv -> query($sql);// ou on peut avec exec
-			header("location: ../admin/experience.php");
-		}
+    }
+    
+# Je récupère la compétence
+$id_formation = $_GET['id_formation'];// par l'id et $_GET
+$sql = $pdocv->query("SELECT * FROM t_formations WHERE id_formation = '$id_formation' "); // la requête égale à l'id
+$ligne_formation = $sql->fetch();//
 
-	?>
-//****************** SUPPRESSION D'UNE COMPETENCE ************************
-if (isset($_GET['id_competence'])) {
-    $eraser = $_GET['id_competence'];
-    $sql = "DELETE FROM t_competences WHERE id_competence = '$eraser'";
-    $pdocv->query($sql); // ou on peut avec "exec"
-    header("location:../admin/competence.php");
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +24,7 @@ if (isset($_GET['id_competence'])) {
 
 <head>
 <?php
-$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
+$sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '$id_utilisateur' ");
 $ligne_utilisateur = $sql->fetch();// va chercher information
 ?>
 
@@ -262,15 +181,18 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
                      <li>
-                        <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Compétences</a>
-                    </li>
-                     <li>
-                        <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
+                        <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Formations</a>
                     </li> 
                     <li>
+                        <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Formations</a>
+                    </li> 
+                    <li class="active">
+                        <a href="formation.php"><i class="fa fa-fw fa-edit"></i> Formations</a>
+                    </li>
+                     <li>
                         <a href="loisir.php"><i class="fa fa-fw fa-edit"></i> Loisirs</a>
                     </li>
-                    <li class="active">
+                    <li >
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
@@ -308,16 +230,12 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
         <div id="page-wrapper">
 
             <div class="container-fluid">
-                <?php
-                    $xp = $pdocv->prepare("SELECT * FROM t_experiences WHERE utilisateur_id = '$id_utilisateur' ORDER BY experience ASC ");
-                    $xp->execute();// execute la
-                    $nbr_experiences = $xp->rowCount();
-                ?>
+
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">EXPERIENCES</h1>
-                        <p> Il y a <?php echo $nbr_experiences; ?> expériences  <?php echo $ligne_utilisateur['pseudo']; ?> </p>
+                        <h1 class="page-header">Modification formation(s)</h1>
+
 
 
                         <ol class="breadcrumb">
@@ -325,7 +243,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                 <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i>EXPERIENCES
+                                <i class="fa fa-table"></i>Formations
                             </li>
                         </ol>
                     </div>
@@ -334,86 +252,39 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>Expériences</th>
-                                        <th>Entreprise</th>
-                                        <th>Date</th>
-                                        <th>Descriptif</th>
-                                        <th>Modifier</th>
-                                        <th>Supprimer</th>
-                                    </tr>
-                                    <tr>
-                                        <?php while ($ligne_xp = $xp->fetch()) { ?>
-                                        <td><?php echo $ligne_xp['experience']; ?></td>
-                                        <td><?php echo $ligne_xp['sous_titre_e']; ?></td>
-                                        <td><?php echo $ligne_xp['dates_e']; ?></td>
-                                        <td><?php echo $ligne_xp['description_e']; ?></td>
-                                        
-                                        <td><a href="modif_experience.php?id_experience=<?php echo $ligne_xp['id_experience'];?>"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
-                                        <td><a href="experience.php?id_experience=<?php echo $ligne_xp['id_experience'];?>"><span class="glyphicon glyphicon-trash pull-right"></span></a></td>
-                                    </tr>
-                                         <?php }?>
-                                </tbody>
-                            </table>
-                        </div>
+
                     </div>
                 </div>
  <div class="row">
-    
-            <!-- FORMULAIRE INSERTION EXPERIENCE--> 
-     
-     <form class="form-horizontal" method="post" action="experience.php">
+    <form class="form-horizontal" method="post" action="modif_formation.php">
     <fieldset>
 
-    <!-- FOrmulaire des expériences -->
-    <legend style="text-align:center;"> Ajout d'une expérience</legend>
+    <!-- Form modification d'une compétence -->
+    <legend style="text-align:center;"> Modification d'une formation</legend>
 
     <!-- Text input-->
     <div class="form-group">
-      
-        
-        <!-- Input expérience-->
-      <div class="col-md-10"><br>
-      <input id="experience" name="experience" type="text" placeholder=" Expérience" class="form-control input-md col-md-10"><br>
-      
-       
-          <!-- Input entreprise--> 
-      <div class="col-md-7"><br>
-      <input id="entreprise" name="sous_titre_e" type="text" placeholder=" Nom de l'entreprise" class="form-control input-md"><br>
-      
-          
-           <!-- Input date -->
-      <input id="date" name="dates_e" type="date" placeholder="Insérez une date" class="form-control input-md"><br>
-        
-         
-           
-            
-            <!-- Input description-->
-        <div class="col-md-12">
-        <textarea id="description" name="description_e" type="text" placeholder="description" class="form-control input-md col-md-12"></textarea><br>
-         <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
-        <script>CKEDITOR.replace( 'description' ) </script>
-          </div>
-            <!-- Button Ajouter -->
-        <div class="col-md-10">
-        <input  type="submit" class="btn btn-primary" value="Ajouter">
-        </div>
-   
-      
-        </div>
-    </div>
-</div>
-         
-         
-          
+      <label class="col-md-4 control-label" for="formation"></label>
+      <div class="col-md-4">
+      <input id="formation" name="formation" type="text"  class="form-control input-md" value="<?php echo $ligne_formation['formation']; ?>">
+      <input hidden name="id_formation" value="<?php echo $ligne_formation['id_formation']; ?>">
 
-  
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="button"></label>
+      <div class="col-md-4">
+        <input  type="submit" class="btn btn-primary" value="Mettre à jour">
+    </div>
+
+
+    </div>
 
     </fieldset>
     </form>
+    <!-- Fin formulaire  -->
 </div>
 
 
@@ -427,14 +298,6 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                 </div>
                 <!-- /.row -->
 
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
 
 
 
@@ -445,6 +308,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-   
-   
-    
+
+</body>
+
+</html>
