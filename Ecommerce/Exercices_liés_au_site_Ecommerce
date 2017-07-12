@@ -1,0 +1,9 @@
+Exercices sur le site Ecommerce
+--------------------------------
+1.Finir la page "gestionCommande en prevoyant un affichage des commandes et un lien permettant d'afficher le détail des commandes"
+
+2.Sur la page profil, afficher sous forme de tableau HTML , les commandes en cours de l'internanute connecté.
+
+3.Toujours sur la page profil, prévoir un lien permettant de modifier les informations du membre. Ce lien nous envoit directement sur la page "membre.php" où il faudra prévoir un formulaire permettant de modifier les informations (récupérations des informations dans les différents champs)
+
+4.Toujours sur la page Profil, prévoir un lien permettant de supprimer le compte
