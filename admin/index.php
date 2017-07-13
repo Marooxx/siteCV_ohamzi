@@ -203,6 +203,9 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                      <li>
                         <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
                     </li>
+                    <li>
+                        <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Formations</a>
+                    </li>
                      <li>
                         <a href="loisir.php"><i class="fa fa-fw fa-bar-chart-o"></i> Loisirs</a>
                     </li>
@@ -229,9 +232,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="blank-page.php"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                    </li>
+                    
                     <li>
                         <a href="index-rtl.php"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                     </li>
@@ -268,27 +269,38 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     <div class="col-lg-12">
                         <div class="alert alert-info alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
+                            <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin </a> for additional features!
                         </div>
                     </div>
                 </div>
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                      <?php
+                        $competence = $pdocv->prepare("SELECT * FROM t_competences WHERE utilisateur_id = '$id_utilisateur' ORDER BY competence ASC ");
+                        $competence->execute();// execute la
+                        $nbr_competences = $competence->rowCount();
+                        ?>
+                    
+                        <!-- SECTION COMPETENCE -->
+                          
+                    <div class="col-lg-2 col-md-2">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
+                                        <i class="fa fa-comments fa-3x"></i>
                                     </div>
+                           
+                                        
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>New Comments!</div>
+                                        <div class="huge"><?php echo $nbr_competences; ?></div>
+                                        <div>COMPETENCES</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <!-- LIen page  "COMPETENCE" -->
+                            <a href="competence.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -297,20 +309,30 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <!--     /. SECTION COMPETENCE               -->
+                    
+                    <?php
+                    $xp = $pdocv->prepare("SELECT * FROM t_experiences WHERE utilisateur_id = '$id_utilisateur' ORDER BY experience ASC ");
+                    $xp->execute();// execute la
+                    $nbr_experiences = $xp->rowCount();
+                    ?>
+                    
+                    <!--   SECTION EXPERIENCES                 -->
+                    <div class="col-lg-2 col-md-2">
                         <div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
+                                        <i class="fa fa-tasks fa-3x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>New Tasks!</div>
+                                        <div class="huge"><?php echo $nbr_experiences; ?></div>
+                                        <div>EXPERIENCES</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                             <!-- LIen page  "EXPERIENCE" -->
+                            <a href="experience.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -319,20 +341,64 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <!--  /. SECTION EXPERIENCES                 -->
+                    
+                      <?php
+                        $formation = $pdocv->prepare("SELECT * FROM t_formations WHERE utilisateur_id = '$id_utilisateur' ORDER BY formation ASC ");
+                        $formation->execute();// execute la
+                        $nbr_formations = $formation->rowCount();
+                        ?>
+                    
+                        <!-- SECTION FORMATION -->
+                          
+                    <div class="col-lg-2 col-md-2">
+                        <div class="panel panel-purple">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-3x"></i>
+                                    </div>
+                           
+                                        
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><?php echo $nbr_formations; ?></div>
+                                        <div>FORMATIONS</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- LIen page  "COMPETENCE" -->
+                            <a href="competence.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                    <?php
+                    $realisation = $pdocv->prepare("SELECT * FROM t_realisations WHERE utilisateur_id = '$id_utilisateur' ORDER BY realisation ASC ");
+                    $realisation->execute();// execute la
+                    $nbr_realisations = $realisation->rowCount();
+                    ?>
+                    
+                        <!-- SECTION REALISATIONS                    -->
+                    <div class="col-lg-2 col-md-2">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                        <i class="fa fa-shopping-cart fa-3x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
-                                        <div>New Orders!</div>
+                                        <div class="huge"><?php echo $nbr_realisations; ?></div>
+                                        <div>REALISATIONS</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="realisation.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -341,20 +407,28 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                     <!--  /.SECTION REALISATIONS                  -->
+                      
+                    <?php
+                    $loisir = $pdocv->prepare("SELECT * FROM t_loisirs WHERE utilisateur_id = '$id_utilisateur' ORDER BY loisir ASC ");
+                    $loisir->execute();// execute la
+                    $nbr_loisirs = $loisir->rowCount();
+                    ?>
+                        <!--  SECTION LOISIRS                     -->
+                    <div class="col-lg-2 col-md-2">
                         <div class="panel panel-red">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-support fa-5x"></i>
+                                        <i class="fa fa-support fa-3x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
-                                        <div>Support Tickets!</div>
+                                        <div class="huge"><?php echo $nbr_loisirs;?></div>
+                                        <div>LOISIRS</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="loisir.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -363,6 +437,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                             </a>
                         </div>
                     </div>
+                    <!-- /.SECTION LOISIRS -->
                 </div>
                 <!-- /.row -->
 

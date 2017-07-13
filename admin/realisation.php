@@ -2,51 +2,25 @@
 <?php require '../connexion/connexion.php';  ?>
 <?php require ("../include/session_inc.php");  ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>REALISATIONS</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-   
-</head>
-
-
 
 <?php
 ## GEstion du contenu
 ## insertion d'une réalisation
 ## gestion des contenus
-	
-    
+	var_dump($_FILES);
           # insertion d'une realisation
 		if(isset($_POST['realisation'])){ # Récupération une nouvelle réalisation
         
             # si réalisation  n'est pas vide
         $titre = addslashes($_POST['realisation']);
         $dates = addslashes($_POST['dates_r']);
-        $photo = addslashes($_POST['photo']);
+        $photo_nom = addslashes($_FILES['photo']['name']);
         $description = addslashes($_POST['description_r']);
-       
+       copy($_FILES['photo']['tmp_name'], 'photo/' . $photo_nom);
+            
             # Requête d'insertion
-        $pdocv->exec("INSERT INTO t_realisations VALUES (NULL, '$titre','$photo','$dates','$description', '$id_utilisateur') ");//mettre $id_utilisateur quand on l'aura en variable de Session
-            header("location: realisation.php");
+        $pdocv->exec("INSERT INTO t_realisations VALUES (NULL, '$titre','$photo_nom','$dates','$description', '$id_utilisateur') ");//mettre $id_utilisateur quand on l'aura en variable de Session
+            header("location: ../admin/realisation.php");
 				exit();
 			}# ferme le if
 		
@@ -60,8 +34,6 @@
 		}
 
 	?>
-
-
 
 
 
@@ -104,6 +76,8 @@ $ligne_utilisateur = $sql->fetch(); # va chercher information
 
 
 
+
+
     
         <div id="page-wrapper">
 
@@ -139,7 +113,7 @@ $ligne_utilisateur = $sql->fetch(); # va chercher information
                                 <tbody>
                                     <tr>
                                         <th>Réalisations</th>
-                                        <th> Images</th>
+                                        <th>Images</th>
                                         <th>Date</th>
                                         <th>Descriptif</th>
                                         <th>Modifier</th>
@@ -148,7 +122,7 @@ $ligne_utilisateur = $sql->fetch(); # va chercher information
                                     <tr>
                                         <?php while ($ligne_realisation = $realisation->fetch()) { ?>
                                         <td><?php echo $ligne_realisation['realisation']; ?></td>
-                                        <td><?php echo $ligne_realisation['photo']; ?></td>
+                                        <td><img src=<?php echo '"photo/'.$ligne_realisation['photo'].'"width="70" height="70""'; ?>></img></td>
                                         <td><?php echo $ligne_realisation['dates_r']; ?></td>
                                         <td><?php echo $ligne_realisation['description_r']; ?></td>
                                         
@@ -165,7 +139,7 @@ $ligne_utilisateur = $sql->fetch(); # va chercher information
     
             <!-- FORMULAIRE INSERTION REALISATION--> 
      
-     <form class="form-horizontal" method="post" action="realisation.php">
+     <form class="form-horizontal" method="post" action="realisation.php" enctype="multipart/form-data">
     <fieldset>
 
     <!-- FOrmulaire des réalisations -->
@@ -182,7 +156,7 @@ $ligne_utilisateur = $sql->fetch(); # va chercher information
        
           <!-- Input photo--> 
       <div class="col-md-7"><br>
-      <input id="photo" name="photo" type="file" placeholder=" Votre image" class="form-control input-md"><br>
+      <input  id="photo" name="photo" type="file" placeholder=" Votre image" class="form-control input-md"><br>
       
           
            <!-- Input date -->
