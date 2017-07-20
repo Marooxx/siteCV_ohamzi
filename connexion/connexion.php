@@ -1,8 +1,8 @@
 <?php
 $hote = 'localhost'; // le chemin vers le serveur
-$bdd = 'siteCV_ohamzi'; // nom de la BDD
+$bdd = 'ohamzi_bd'; // nom de la BDD
 $utilisateur = 'root'; //  le nom de l' utilisateur pour se connecter
-$passe = ''; // mot de passe de l'utilisateur
+$passe = 'nXx722%w'; // mot de passe de l'utilisateur
 // $passe = 'root'; // mot de passe de l'utilisateur sur mac en local
 
 $pdocv = new PDO('mysql:host='.$hote.';dbname='.$bdd, $utilisateur, $passe);// connection à la BDD
