@@ -1,8 +1,8 @@
 
 <?php require '../connexion/connexion.php' ?>
-<?php 
+<?php
     // Sessicon d'identification
-    
+
 session_start();// à mettre sur toutes les pages de l'admin; SESSION et authentification
     if(isset($_SESSION['connexion']) && $_SESSION['connexion']='connecté'){
         $id_utilisateur = $_SESSION['id_utilisateur'];
@@ -12,7 +12,7 @@ session_start();// à mettre sur toutes les pages de l'admin; SESSION et authent
         header('location:login.php');
     }
 // pour se déconnecter
-if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url 
+if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url
     $_SESSION['connexion'] ='';// on vide les variables de session
     $_SESSION['id_utilisateur'] ='';// on vide les variables de session
     $_SESSION['prenom'] ='';// on vide les variables de session
@@ -21,7 +21,7 @@ if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url
 
     unset($_SESSION['connexion']);
     session_destroy();
-    
+
     header('location:index.php');
 }
 
@@ -232,7 +232,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li>
                         <a href="index-rtl.php"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                     </li>
@@ -281,9 +281,9 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         $competence->execute();// execute la
                         $nbr_competences = $competence->rowCount();
                         ?>
-                    
+
                         <!-- SECTION COMPETENCE -->
-                          
+
                     <div class="col-lg-2 col-md-2">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -291,8 +291,8 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                     <div class="col-xs-3">
                                         <i class="fa fa-comments fa-3x"></i>
                                     </div>
-                           
-                                        
+
+
                                     <div class="col-xs-9 text-right">
                                         <div class="huge"><?php echo $nbr_competences; ?></div>
                                         <div>COMPETENCES</div>
@@ -310,13 +310,13 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         </div>
                     </div>
                     <!--     /. SECTION COMPETENCE               -->
-                    
+
                     <?php
                     $xp = $pdocv->prepare("SELECT * FROM t_experiences WHERE utilisateur_id = '$id_utilisateur' ORDER BY experience ASC ");
                     $xp->execute();// execute la
                     $nbr_experiences = $xp->rowCount();
                     ?>
-                    
+
                     <!--   SECTION EXPERIENCES                 -->
                     <div class="col-lg-2 col-md-2">
                         <div class="panel panel-green">
@@ -342,15 +342,15 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         </div>
                     </div>
                     <!--  /. SECTION EXPERIENCES                 -->
-                    
+
                       <?php
                         $formation = $pdocv->prepare("SELECT * FROM t_formations WHERE utilisateur_id = '$id_utilisateur' ORDER BY formation ASC ");
                         $formation->execute();// execute la
                         $nbr_formations = $formation->rowCount();
                         ?>
-                    
+
                         <!-- SECTION FORMATION -->
-                          
+
                     <div class="col-lg-2 col-md-2">
                         <div class="panel panel-purple">
                             <div class="panel-heading">
@@ -358,8 +358,8 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                     <div class="col-xs-3">
                                         <i class="fa fa-comments fa-3x"></i>
                                     </div>
-                           
-                                        
+
+
                                     <div class="col-xs-9 text-right">
                                         <div class="huge"><?php echo $nbr_formations; ?></div>
                                         <div>FORMATIONS</div>
@@ -376,14 +376,14 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                             </a>
                         </div>
                     </div>
-                    
-                    
+
+
                     <?php
                     $realisation = $pdocv->prepare("SELECT * FROM t_realisations WHERE utilisateur_id = '$id_utilisateur' ORDER BY realisation ASC ");
                     $realisation->execute();// execute la
                     $nbr_realisations = $realisation->rowCount();
                     ?>
-                    
+
                         <!-- SECTION REALISATIONS                    -->
                     <div class="col-lg-2 col-md-2">
                         <div class="panel panel-yellow">
@@ -408,7 +408,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                         </div>
                     </div>
                      <!--  /.SECTION REALISATIONS                  -->
-                      
+
                     <?php
                     $loisir = $pdocv->prepare("SELECT * FROM t_loisirs WHERE utilisateur_id = '$id_utilisateur' ORDER BY loisir ASC ");
                     $loisir->execute();// execute la
