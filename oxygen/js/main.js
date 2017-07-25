@@ -159,4 +159,9 @@ jQuery(function($) {
 	}
 	google.maps.event.addDomListener(window, 'load', initialize_map);
 
+	// $('.progress-bar').animate({
+	// 	taille = $(this).attr('id');
+	// 	height: taille;
+	// }, 500);
+
 });

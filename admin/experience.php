@@ -1,7 +1,7 @@
 
-<?php require '../connexion/connexion.php'; 
+<?php require '../connexion/connexion.php';
 // Sessicon d'identification
-    
+
 session_start();// à mettre sur toutes les pages de l'admin; SESSION et authentification
     if(isset($_SESSION['connexion']) && $_SESSION['connexion']='connecté'){
         $id_utilisateur = $_SESSION['id_utilisateur'];
@@ -11,7 +11,7 @@ session_start();// à mettre sur toutes les pages de l'admin; SESSION et authent
         header('location:login.php');
     }
 // pour se déconnecter
-if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url 
+if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url
     $_SESSION['connexion'] ='';// on vide les variables de session
     $_SESSION['id_utilisateur'] ='';// on vide les variables de session
     $_SESSION['prenom'] ='';// on vide les variables de session
@@ -20,7 +20,7 @@ if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url
 
     unset($_SESSION['connexion']);
     session_destroy();
-    
+
     header('location:index.php');
 }
 ?>
@@ -82,7 +82,7 @@ if(isset($_GET['deconnect'])){// on récupère le terme quitter dans l'url
 			}//ferme le if
 		//ferme le if isset
 
-	//suppression d'une expérience  
+	//suppression d'une expérience
 		if(isset($_GET['id_experience'])){
 			$eraser= $_GET['id_experience'];
 			$sql = " DELETE FROM t_experiences WHERE id_experience = '$eraser' ";
@@ -264,13 +264,13 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                      <li>
                         <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Compétences</a>
                     </li>
-                     <li>
+                     <li class="active">>
                         <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
-                    </li> 
+                    </li>
                     <li>
                         <a href="loisir.php"><i class="fa fa-fw fa-edit"></i> Loisirs</a>
                     </li>
-                    <li class="active">
+                    <li
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
@@ -351,7 +351,7 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                                         <td><?php echo $ligne_xp['sous_titre_e']; ?></td>
                                         <td><?php echo $ligne_xp['dates_e']; ?></td>
                                         <td><?php echo $ligne_xp['description_e']; ?></td>
-                                        
+
                                         <td><a href="modif_experience.php?id_experience=<?php echo $ligne_xp['id_experience'];?>"><span class="glyphicon glyphicon-wrench pull-right"></span></a></td>
                                         <td><a href="experience.php?id_experience=<?php echo $ligne_xp['id_experience'];?>"><span class="glyphicon glyphicon-trash pull-right"></span></a></td>
                                     </tr>
@@ -362,9 +362,9 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     </div>
                 </div>
  <div class="row">
-    
-            <!-- FORMULAIRE INSERTION EXPERIENCE--> 
-     
+
+            <!-- FORMULAIRE INSERTION EXPERIENCE-->
+
      <form class="form-horizontal" method="post" action="experience.php">
     <fieldset>
 
@@ -373,24 +373,24 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
     <!-- Text input-->
     <div class="form-group">
-      
-        
+
+
         <!-- Input expérience-->
       <div class="col-md-10"><br>
       <input id="experience" name="experience" type="text" placeholder=" Expérience" class="form-control input-md col-md-10"><br>
-      
-       
-          <!-- Input entreprise--> 
+
+
+          <!-- Input entreprise-->
       <div class="col-md-7"><br>
       <input id="entreprise" name="sous_titre_e" type="text" placeholder=" Nom de l'entreprise" class="form-control input-md"><br>
-      
-          
+
+
            <!-- Input date -->
       <input id="date" name="dates_e" type="date" placeholder="Insérez une date" class="form-control input-md"><br>
-        
-         
-           
-            
+
+
+
+
             <!-- Input description-->
         <div class="col-md-12">
         <textarea id="description" name="description_e" type="text" placeholder="description" class="form-control input-md col-md-12"></textarea><br>
@@ -401,16 +401,16 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
         <div class="col-md-10">
         <input  type="submit" class="btn btn-primary" value="Ajouter">
         </div>
-   
-      
+
+
         </div>
     </div>
 </div>
-         
-         
-          
 
-  
+
+
+
+
 
     </fieldset>
     </form>
@@ -445,6 +445,3 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-   
-   
-    

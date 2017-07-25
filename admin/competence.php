@@ -183,17 +183,17 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
                     <li>
                         <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
-                     <li>
+                     <li class="active">
                         <a href="competence.php"><i class="fa fa-fw fa-edit"></i> Compétences</a>
-                    </li> 
+                    </li>
                     <li>
                         <a href="experience.php"><i class="fa fa-fw fa-edit"></i> Expériences</a>
-                    </li> 
+                    </li>
                     <li>
                         <a href="loisir.php"><i class="fa fa-fw fa-edit"></i> Loisirs</a>
                     </li>
-                    
-                    <li class="active">
+
+                    <li >
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
@@ -305,25 +305,25 @@ $ligne_utilisateur = $sql->fetch();// va chercher information
     </form>
 </div>
 
-
-                <!-- /.row -->
-
+<!-- /.row -->
 
 
-                        </div>
-                    </div>
 
-                </div>
-                <!-- /.row -->
+</div>
+</div>
 
-            </div>
-            <!-- /.container-fluid -->
+</div>
+<!-- /.row -->
 
-        </div>
-        <!-- /#page-wrapper -->
+</div>
+<!-- /.container-fluid -->
 
-    </div>
-    <!-- /#wrapper -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
 
 
 
