@@ -1,29 +1,33 @@
-$('#example').timeliny({
+(function() {
 
-  // or 'desc'
-  order: 'asc',
+  'use strict';
 
-  // classname for the timeline
-  className: 'timeliny',
+  // define variables
+  var items = document.querySelectorAll(".timeline li");
 
-  // timeline wrapper
-  wrapper: '<div class="timeliny-wrapper"></div>',
+  // check if an element is in viewport
+  // http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+  function isElementInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
 
-  // boundaries
-  boundaries: 2,
+  function callbackFunc() {
+    for (var i = 0; i < items.length; i++) {
+      if (isElementInViewport(items[i])) {
+        items[i].classList.add("in-view");
+      }
+    }
+  }
 
-  // animation speed in ms
-  animationSpeed: 250,
+  // listen for events
+  window.addEventListener("load", callbackFunc);
+  window.addEventListener("resize", callbackFunc);
+  window.addEventListener("scroll", callbackFunc);
 
-  // hides blank years
-  hideBlankYears: false,
-
-  // callbacks
-  onInit: function() {},
-  onDestroy: function() {},
-  afterLoad: function(currYear) {},
-  onLeave: function(currYear, nextYear) {},
-  afterChange: function(currYear) {},
-  afterResize: function() {}
-
-});
+})();

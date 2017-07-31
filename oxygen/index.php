@@ -33,7 +33,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
     <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <link href="dist/jquery.timeliny.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/timeline.css">
     <!-- <link href="css/timeline.css" rel="stylesheet"> -->
 
     <!--[if lt IE 9]>
@@ -346,22 +346,76 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                 </div>
             </div>
             <!-- Timeline   -->
-            <div id="example">
-2
-                <div data-year="2002">Licence Arts plastiques</div>
-3
-                <div data-year="2003/2007">Opérateur de télésurveillance</div>
-4
-                <div data-year="2008">Chargé de clientèle </div>
-5
-                <div data-year="2010 - 2011">Conseiller de clientèle à distance distance</div>
-6
-                <div data-year="2012 - 2013" class="active">Vendeur spécialisé dans l'e-commerce</div>
+            <section class="intro">
+      <div class="container">
+        <h1>Vertical Timeline &darr;</h1>
+      </div>
+    </section>
 
-                <div data-year="2017" class="active">Développeur et Intégrateur web</div>
-7
-            </div>
-
+    <section class="timeline">
+      <ul>
+        <li>
+          <div>
+            <time>1934</time> At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1937</time> Proin quam velit, efficitur vel neque vitae, rhoncus commodo mi. Suspendisse finibus mauris et bibendum molestie. Aenean ex augue, varius et pulvinar in, pretium non nisi.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1940</time> Proin iaculis, nibh eget efficitur varius, libero tellus porta dolor, at pulvinar tortor ex eget ligula. Integer eu dapibus arcu, sit amet sollicitudin eros.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1943</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1946</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1956</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1957</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1967</time> Aenean condimentum odio a bibendum rhoncus. Ut mauris felis, volutpat eget porta faucibus, euismod quis ante.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1977</time> Vestibulum porttitor lorem sed pharetra dignissim. Nulla maximus, dui a tristique iaculis, quam dolor convallis enim, non dignissim ligula ipsum a turpis.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>1985</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>2000</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+          </div>
+        </li>
+        <li>
+          <div>
+            <time>2005</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+          </div>
+        </li>
+      </ul>
+    </section>
 
             <!-- #/Timeline  -->
 
@@ -628,6 +682,11 @@ $ligne_competence = $sql->fetchAll();// va chercher information
             <script type="text/javascript" src="js/lightbox.min.js"></script>
             <script type="text/javascript" src="js/main.js"></script>
             <!-- <script type="text/javascript" src="js/timeline.js"></script> -->
+            <script src="//code.jquery.com/jquery-latest.min.js"></script>
+            <script src="dist/jquery.timeliny.js"></script>
+            <script type="text/javascript" src="js/timeline.js">
+
+            </script>
 
         </body>
         </html>
