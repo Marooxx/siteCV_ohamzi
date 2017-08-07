@@ -61,23 +61,10 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                         <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">Start now</a>
                     </div>
                 </div>
-                <div class="item" style="background-image: url(images/slider/2.jpg)">
-                    <div class="caption">
-                        <h1 class="animated fadeInLeftBig">Say Hello to <span>Oxygen</span></h1>
-                        <p class="animated fadeInRightBig">Bootstrap - Responsive Design - Retina Ready - Parallax</p>
-                        <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">Start now</a>
-                    </div>
-                </div>
-                <div class="item" style="background-image: url(images/slider/3.jpg)">
-                    <div class="caption">
-                        <h1 class="animated fadeInLeftBig">I am <span>Creative</span></h1>
-                        <p class="animated fadeInRightBig">Bootstrap - Responsive Design - Retina Ready - Parallax</p>
-                        <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">Start now</a>
-                    </div>
-                </div>
+
             </div>
-            <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-            <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
+            <!--<a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+            <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>-->
 
             <a id="tohash" href="#services"><i class="fa fa-angle-down"></i></a>
 
@@ -126,7 +113,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                 </div>
                 <!-- Mes Compétences  -->
                 <div class="col-sm-6">
-                    <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" style="background-image:url(../images/fond2.jpg)>
                         <?php foreach ($ligne_competence as $jauge ): ?>
                             <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
                                 <p class="lead"><?= $jauge['competence'] ?></p>
@@ -148,12 +135,12 @@ $ligne_competence = $sql->fetchAll();// va chercher information
 
 
 
-
+            <!-- REALISATIONS  -->
     <section id="portfolio">
         <div class="container">
             <div class="row">
-                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                    <h2> Portfolio</h2>
+                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms" style="background-image:url(../images/fond1.jpg) no-repeat;">
+                    <h2> Réalisations</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
                 </div>
             </div>
@@ -336,21 +323,17 @@ $ligne_competence = $sql->fetchAll();// va chercher information
         </div><!-- /#portfolio-single-wrap -->
     </section><!--/#portfolio-->
 
+        <!-- Expérience et formations  -->
     <section id="team">
         <div class="container">
             <div class="row">
-                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms" style="margin-top:186px">
                     <h2>Expériences et Formations</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
+
 
                 </div>
             </div>
             <!-- Timeline   -->
-            <section class="intro">
-      <div class="container">
-        <h1>Vertical Timeline &darr;</h1>
-      </div>
-    </section>
 
     <section class="timeline">
       <ul>
@@ -415,9 +398,11 @@ $ligne_competence = $sql->fetchAll();// va chercher information
           </div>
         </li>
       </ul>
+      <!-- #/Timeline  -->
     </section>
+    <!-- #/Expériences et formations -->
 
-            <!-- #/Timeline  -->
+
 
             <!-- Atouts  -->
             <section id="services">
