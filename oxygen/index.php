@@ -34,7 +34,8 @@ $ligne_competence = $sql->fetchAll();// va chercher information
     <link href="css/responsive.css" rel="stylesheet">
     <link href="dist/jquery.timeliny.css" rel="stylesheet">
     <link rel="stylesheet" href="css/timeline.css">
-    <!-- <link href="css/timeline.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/mystyle.css">
+
 
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -100,20 +101,21 @@ $ligne_competence = $sql->fetchAll();// va chercher information
 
 
 
-    <!-- Compétences  -->
-    <section id="about-us" class="parallax">
+                    <!--******************************* Compétences ************************************************ -->
+    <section id="about-us" class="parallax" style="
+    margin-top: 53px;">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2>Mes Compétetences</h2>
+                        <h2>Mes Compétences</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.Ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </div>
                 </div>
                 <!-- Mes Compétences  -->
                 <div class="col-sm-6">
-                    <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" style="background-image:url(../images/fond2.jpg)>
+                    <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" >
                         <?php foreach ($ligne_competence as $jauge ): ?>
                             <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
                                 <p class="lead"><?= $jauge['competence'] ?></p>
@@ -135,11 +137,11 @@ $ligne_competence = $sql->fetchAll();// va chercher information
 
 
 
-            <!-- REALISATIONS  -->
+            <!-- ***********************************REALISATIONS******************************************  -->
     <section id="portfolio">
         <div class="container">
             <div class="row">
-                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms" style="background-image:url(../images/fond1.jpg) no-repeat;">
+                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms" >
                     <h2> Réalisations</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
                 </div>
@@ -321,9 +323,12 @@ $ligne_competence = $sql->fetchAll();// va chercher information
             <div id="portfolio-single">
             </div>
         </div><!-- /#portfolio-single-wrap -->
-    </section><!--/#portfolio-->
+    </section><!--/#Réalisations-->
 
-        <!-- Expérience et formations  -->
+
+
+
+              <!--************************************ Expérience et formations ************************************* -->
     <section id="team">
         <div class="container">
             <div class="row">
@@ -333,7 +338,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
 
                 </div>
             </div>
-            <!-- Timeline   -->
+            <!-- ####### Timeline ############   -->
 
     <section class="timeline">
       <ul>
@@ -404,9 +409,9 @@ $ligne_competence = $sql->fetchAll();// va chercher information
 
 
 
-            <!-- Atouts  -->
-            <section id="services">
-                <div class="container">
+            <!--*********************************** Atouts ****************************************  -->
+            <section id="services" >
+                <div class="container" style="background-image:../images/fond2.jpg;">
                     <div class="heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <div class="row">
                             <div class="text-center col-sm-8 col-sm-offset-2">
@@ -480,7 +485,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                 <div class="container">
                     <div class="row">
                         <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
-                            <h2>Loisirs</h2>
+                            <h2>Centre d'intérêts</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
                         </div>
                     </div>
@@ -566,9 +571,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                                 </div>
                             </div>
                         </div>
-                        <div class="load-more wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-                            <a href="#" class="btn-loadmore"><i class="fa fa-repeat"></i> Load More</a>
-                        </div>
+
                     </div>
                 </div>
             </section><!--/#blog-->

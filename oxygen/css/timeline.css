@@ -8,7 +8,7 @@
 
 body {
   font: normal 16px/1.5 "Helvetica Neue", sans-serif;
-  background-image: url(../images/fond1.jpg);
+  background: #fff;
   color: #000000;
   overflow-x: hidden;
   padding-bottom: 50px;
@@ -36,7 +36,8 @@ h1 {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .timeline ul {
-  background-image: url(../images/chrono2.jpg)  ;
+  background-image: url(../images/chrono2.jpg);
+  size:100%;
   padding: 50px 0;
 }
 
