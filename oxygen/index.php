@@ -115,7 +115,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                 </div>
                 <!-- Rendre dynamique les Compétences  -->
                 <div class="col-sm-6">
-                    <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" >
+                    <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" style="width:'<?= $ligne_competence['']'" >
                         <!-- Boucle sur l'affichage des compétences  -->
                         <?php foreach ($ligne_competence as $jauge ): ?>
                             <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
