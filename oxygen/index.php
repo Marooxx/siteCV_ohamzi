@@ -16,8 +16,8 @@ $ligne_competence = $sql->fetchAll();// va chercher information
 
     <!-- Requête d'affichage dynamique du Prénom et Nom  -->
     <?php
-    $sql = $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
-    $ligne_utilisateur = $sql->fetch();// va chercher information
+    $user= $pdocv->query("SELECT * FROM t_utilisateurs WHERE id_utilisateur = '1' ");
+    $ligne_utilisateur = $user->fetch();// va chercher information
     ?>
 
     <meta charset="utf-8">
@@ -109,13 +109,14 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                 <div class="col-sm-6">
                     <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <h2>Mes Compétences</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.Ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p> </p>
+                        <p></p>
                     </div>
                 </div>
-                <!-- Mes Compétences  -->
+                <!-- Rendre dynamique les Compétences  -->
                 <div class="col-sm-6">
                     <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" >
+                        <!-- Boucle sur l'affichage des compétences  -->
                         <?php foreach ($ligne_competence as $jauge ): ?>
                             <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
                                 <p class="lead"><?= $jauge['competence'] ?></p>
@@ -143,7 +144,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
             <div class="row">
                 <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms" >
                     <h2> Réalisations</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
+                    <p>En cours de construction</p>
                 </div>
             </div>
         </div>
@@ -339,73 +340,96 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                 </div>
             </div>
             <!-- ####### Timeline ############   -->
+        <!-- Requête d'affichage pour expérience  -->
+        <?php
+        $experience = $pdocv->query("SELECT * FROM t_experiences WHERE utilisateur_id = '1' ORDER BY id_experience ASC ");
+        //var_dump($sql);
+        $ligne_xp = $experience->fetch();// va chercher information
+        var_dump($ligne_xp);
+        ?>
+
+        <!-- Requête d'affichage formation  -->
+        <?php
+        $formation = $pdocv->query("SELECT * FROM t_formations WHERE utilisateur_id = '1' ORDER BY dates_f  ");
+        //var_dump($sql);
+        $ligne_formation = $formation->fetch();// va chercher information
+        ?>
+
 
     <section class="timeline">
+
       <ul>
         <li>
           <div>
-            <time>1934</time> At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+              <time><?= $ligne_xp['dates_e'] ?></time>
+              <?= $ligne_xp['experience'] ?>
+
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1937</time> Proin quam velit, efficitur vel neque vitae, rhoncus commodo mi. Suspendisse finibus mauris et bibendum molestie. Aenean ex augue, varius et pulvinar in, pretium non nisi.
+              <time><?= $ligne_xp['dates_e'] ?></time>
+              <?= $ligne_xp['experience'] ?>
+
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1940</time> Proin iaculis, nibh eget efficitur varius, libero tellus porta dolor, at pulvinar tortor ex eget ligula. Integer eu dapibus arcu, sit amet sollicitudin eros.
+              <time>1940</time> Proin iaculis, nibh eget efficitur varius, libero tellus porta dolor, at pulvinar tortor ex eget ligula. Integer eu dapibus arcu, sit amet sollicitudin eros.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1943</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+              <time>1943</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1946</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+              <time>1946</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1956</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+              <time>1956</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1957</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+              <time>1957</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1967</time> Aenean condimentum odio a bibendum rhoncus. Ut mauris felis, volutpat eget porta faucibus, euismod quis ante.
+              <time>1967</time> Aenean condimentum odio a bibendum rhoncus. Ut mauris felis, volutpat eget porta faucibus, euismod quis ante.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1977</time> Vestibulum porttitor lorem sed pharetra dignissim. Nulla maximus, dui a tristique iaculis, quam dolor convallis enim, non dignissim ligula ipsum a turpis.
+              <time>1977</time> Vestibulum porttitor lorem sed pharetra dignissim. Nulla maximus, dui a tristique iaculis, quam dolor convallis enim, non dignissim ligula ipsum a turpis.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>1985</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+              <time>1985</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>2000</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+              <time>2000</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
           </div>
-        </li>
-        <li>
+      </li>
+      <li>
           <div>
-            <time>2005</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
+              <time>2005</time> In mattis elit vitae odio posuere, nec maximus massa varius. Suspendisse varius volutpat mattis. Vestibulum id magna est.
           </div>
-        </li>
-      </ul>
-      <!-- #/Timeline  -->
-    </section>
-    <!-- #/Expériences et formations -->
+      </li>
+  </ul>
+  <!-- #/Timeline  -->
+</section>
+<!-- #/Expériences et formations -->
+
+
+
 
 
 
@@ -669,7 +693,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
             <script type="text/javascript" src="js/jquery.countTo.js"></script>
             <script type="text/javascript" src="js/lightbox.min.js"></script>
             <script type="text/javascript" src="js/main.js"></script>
-            <!-- <script type="text/javascript" src="js/timeline.js"></script> -->
+            <script type="text/javascript" src="js/timeline.js"></script>
             <script src="//code.jquery.com/jquery-latest.min.js"></script>
             <script src="dist/jquery.timeliny.js"></script>
             <script type="text/javascript" src="js/timeline.js">
