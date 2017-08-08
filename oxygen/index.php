@@ -115,13 +115,13 @@ $ligne_competence = $sql->fetchAll();// va chercher information
                 </div>
                 <!-- Rendre dynamique les Compétences  -->
                 <div class="col-sm-6">
-                    <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" style="width:'<?= $ligne_competence['']'" >
+                    <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms"
                         <!-- Boucle sur l'affichage des compétences  -->
                         <?php foreach ($ligne_competence as $jauge ): ?>
                             <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
                                 <p class="lead"><?= $jauge['competence'] ?></p>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-primary six-sec-ease-in-out" role="progressbar"  aria-valuetransitiongoal="<?= $jauge['niveau'] ?>"><?= $jauge['niveau'] ?></div>
+                                    <div class="progress-bar progress-bar-primary six-sec-ease-in-out" role="progressbar"  aria-valuetransitiongoal="<?= $jauge['niveau'] ?>"><?= $jauge['niveau'] ?>%</div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
