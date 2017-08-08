@@ -345,7 +345,7 @@ $ligne_competence = $sql->fetchAll();// va chercher information
         $experience = $pdocv->query("SELECT * FROM t_experiences WHERE utilisateur_id = '1' ORDER BY id_experience ASC ");
         //var_dump($sql);
         $ligne_xp = $experience->fetch();// va chercher information
-        var_dump($ligne_xp);
+        
         ?>
 
         <!-- Requête d'affichage formation  -->
