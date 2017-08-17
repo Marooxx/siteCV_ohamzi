@@ -325,7 +325,7 @@ section {
 ********About CSS*******
 **************************/
 #about-us {
-  background-image: url(../images/about-bg.jpg);
+  background-image: url(../images/web.png);
   padding: 60px 0;
 }
 
@@ -345,7 +345,7 @@ section {
 
 .progress{
   height: 20px;
-  background-color: #fff;
+  background-color: #c7b6b6;
   border-radius: 0;
   box-shadow: none;
   -webkit-box-shadow: none;
